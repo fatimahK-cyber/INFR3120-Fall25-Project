@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- creating the title that shows on the browser tab. This is the home page for my fitness tracker called Workit.-->
+    <title>Workit - Home</title>
+
+    <!-- Linking my external CSS file. The styles.css file lives in /public/css and handles all the visual styling. -->
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+
+<!--  header section: This is the top area of the page that stays consistent across the site. It includes my logo, the site name, and the navigation links.-->
+<header class="header">
+
+    <!-- Logo and site name container. I’m using my custom Workit logo image and putting the name beside it.-->
+    <div class="logo">
+        <!-- My logo image for Workit. Stored in /public/images. -->
+        <img src="/images/logo-workit.PNG" alt="Workit Logo" class="logo-img">
+
+        <!-- Main site name so users know what the app is called. -->
+        <h1 class="site-name">Workit</h1>
+    </div>
+
+    <!-- navigation bar: These are the main links for the app.Right now they just link to the routes my teammates and I will build.-->
+    <nav class="nav">
+        <!-- Home link – this is the current page. -->
+        <a href="/" class="nav-link">Home</a>
+
+        <!-- Link to the page where users can add a new workout (Create). -->
+        <a href="/workouts/new" class="nav-link">Add Workout</a>
+
+        <!-- Link to the page that will list all workouts (Read). -->
+        <a href="/workouts" class="nav-link">My Workouts</a>
+    </nav>
+</header>
+
+
+<main class="hero">
+    <!-- Simple heading to show that this is the landing page for Workit. -->
+    <h2>Welcome to Workit</h2>
+
+    <!-- Short intro line. I’ll expand this in the next version. -->
+    <p class="description">
+        This is the home page for my Workit fitness tracker project.
+    </p>
+</main>
+
+<!--  footer: Basic footer so the page looks complete.-->
+<footer>
+    <p>&copy; 2025 Workit · INFR3120 Project</p>
+</footer>
+
+</body>
+</html>
