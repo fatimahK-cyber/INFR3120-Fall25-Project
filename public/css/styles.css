@@ -1,0 +1,129 @@
+/* GLOBAL PAGE SETTINGS */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #e6d4f8;   
+    color: #253b71;            
+    text-align: center;
+}
+
+/* Wrapper so everything stays centered and spaced nicely */
+.page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/*HEADER (white spacing at top)*/
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: #ffffff; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-bottom: 3px solid #f4c4e6; 
+}
+
+/* Logo + site name */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Bigger logo + glow */
+.logo-img {
+    width: 130px;   
+    height: auto;
+    object-fit: contain;
+
+    
+    filter: drop-shadow(0 0 22px rgba(244, 191, 220, 0.95));
+}
+
+/* Site name next to logo */
+.site-name {
+    font-size: 32px;   
+    font-weight: 700;
+    color: #253b71;
+}
+
+/* Navigation links on right */
+.nav-link {
+    margin-left: 18px;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #253b71;
+    transition: 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #d8314b; 
+}
+
+/* HERO/MAIN SECTION*/
+
+.hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 45px 20px;
+}
+
+/* Title under the logo */
+.hero h2 {
+    font-size: 34px;
+    font-weight: 700;
+    margin: 20px 0 12px 0;
+}
+
+/* About text */
+.description {
+    max-width: 600px;
+    margin: 0 auto 25px auto;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/*CTA BUTTON */
+
+.hero-btn {
+    display: inline-block;
+    padding: 14px 34px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #253b71;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(37, 59, 113, 0.3);
+    transition: 0.25s ease;
+}
+
+.hero-btn:hover {
+    background-color: #d8314b;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 12px 26px rgba(216, 49, 75, 0.4);
+}
+
+/* FOOTER */
+
+footer {
+    padding: 18px 0;
+    background: #ffffff; 
+    color: #253b71;
+    font-size: 14px;
+    border-top: 3px solid #f4c4e6; 
+    opacity: 0.9;
+}
