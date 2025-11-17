@@ -9,16 +9,27 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+// BODY PARSER (needed for forms)
+app.use(express.urlencoded({ extended: true }));
+
 // SERVE STATIC FILES (CSS, images)
 app.use(express.static(path.join(__dirname, "public")));
 
+// IMPORT WORKOUT ROUTES
+const workoutsRouter = require("./routes/index");
+
+
 // HOME PAGE ROUTE
-// This matches Express routing concepts (MEAN slides)
 app.get("/", (req, res) => {
-    res.render("home");
+    res.render("dashboard"); 
 });
+
+
+// MOUNT WORKOUT ROUTES
+app.use("/workouts", workoutsRouter);
 
 // START SERVER
 app.listen(3000, () => {
     console.log("Workit running on http://localhost:3000");
 });
+

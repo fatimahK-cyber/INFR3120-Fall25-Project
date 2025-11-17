@@ -1,18 +1,16 @@
-const express = require("express");
-const router = express.Router();
+let workouts = [
+    { id: 1, name: "Push Ups", reps: 20 },
+    { id: 2, name: "Squats", reps: 15 }
+];
 
-const { getAll, deleteById } = require("../data/workouts");
+// Return all workouts
+function getAll() {
+    return workouts;
+}
 
-// GET /workouts  → My Workouts page
-router.get("/", (req, res) => {
-    const workouts = getAll();
-    res.render("workouts/index", { workouts });
-});
+// Delete by ID
+function deleteById(id) {
+    workouts = workouts.filter(w => w.id != id);
+}
 
-// POST /workouts/:id/delete  → Delete workout
-router.post("/:id/delete", (req, res) => {
-    deleteById(req.params.id);
-    res.redirect("/workouts");
-});
-
-module.exports = router;
+module.exports = { getAll, deleteById };

@@ -127,3 +127,305 @@ footer {
     border-top: 3px solid #f4c4e6; 
     opacity: 0.9;
 }
+
+
+/* ------------------------------------------------------ */
+/*                   GLOBAL PAGE SETTINGS                 */
+/* ------------------------------------------------------ */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #e6d4f8;
+    color: #253b71;
+    text-align: center;
+}
+
+/* Wrapper */
+.page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ------------------------------------------------------ */
+/*                         HEADER                          */
+/* ------------------------------------------------------ */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 60px;
+    background: linear-gradient(to bottom, #ffffff, #f9f5ff);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-bottom: 3px solid #f4c4e6;
+}
+
+/* Logo + name */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+}
+
+.site-name {
+    font-size: 34px;
+    font-weight: 700;
+    color: #253b71;
+}
+
+/* ------------------------------------------------------ */
+/*                      NAVIGATION BAR                     */
+/* ------------------------------------------------------ */
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+/* Default link style */
+.nav-link {
+    position: relative;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #253b71;
+    opacity: 0.85;
+    background: transparent;
+    transition: 0.25s ease;
+}
+
+/* Hover underline */
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    bottom: 4px;
+    height: 2px;
+    border-radius: 999px;
+    background-color: #d8314b;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.2s ease;
+}
+
+.nav-link:hover {
+    opacity: 1;
+    background: rgba(230, 212, 248, 0.5);
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+/* Active page tab */
+.nav-link-active {
+    background: #253b71 !important;
+    color: #ffffff !important;
+    opacity: 1;
+    box-shadow: 0 6px 14px rgba(37, 59, 113, 0.25);
+}
+
+.nav-link-active::after {
+    display: none;
+}
+
+/* ------------------------------------------------------ */
+/*                        HERO SECTION                     */
+/* ------------------------------------------------------ */
+
+.hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 45px 20px;
+}
+
+.hero h2 {
+    font-size: 34px;
+    font-weight: 700;
+    margin: 20px 0 12px 0;
+}
+
+.description {
+    max-width: 650px;
+    margin: 0 auto 25px auto;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* CTA Button */
+.hero-btn {
+    display: inline-block;
+    padding: 14px 34px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #253b71;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(37, 59, 113, 0.3);
+    transition: 0.25s ease;
+}
+
+.hero-btn:hover {
+    background-color: #d8314b;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 12px 26px rgba(216, 49, 75, 0.4);
+}
+
+/* ------------------------------------------------------ */
+/*                        FOOTER                           */
+/* ------------------------------------------------------ */
+
+footer {
+    padding: 18px 0;
+    background: #ffffff;
+    color: #253b71;
+    font-size: 14px;
+    border-top: 3px solid #f4c4e6;
+    opacity: 0.9;
+}
+
+/* ------------------------------------------------------ */
+/*                  MY WORKOUTS PAGE STYLING               */
+/* ------------------------------------------------------ */
+
+.hero.workouts-hero {
+    padding-top: 30px;
+}
+
+.workouts-heading-main {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+/* Outer container */
+.workouts-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Card */
+.workouts-card {
+    width: 92%;
+    max-width: 950px;
+    background: #ffffff;
+    padding: 28px 32px;
+    border-radius: 22px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.10);
+    border: 2.5px solid #f4c4e6;
+    background-image: radial-gradient(circle at top left, #fdf0ff 0, #ffffff 55%);
+    text-align: left;
+}
+
+.workouts-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+/* Table */
+.workouts-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.workouts-table thead tr {
+    background: #e6d4f8;
+}
+
+.workouts-table th {
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: left;
+    color: #253b71;
+    border-bottom: 2px solid #f4c4e6;
+}
+
+.workouts-table td {
+    padding: 16px;
+    font-size: 15px;
+    color: #253b71;
+    border-bottom: 1px solid rgba(244, 196, 230, 0.6);
+}
+
+/* Row colors */
+.workouts-table tbody tr:nth-child(even) td {
+    background: #fdf4ff;
+}
+
+.workouts-table tbody tr:hover td {
+    background: #fcecff;
+    transition: 0.3s ease;
+}
+
+/* Action buttons */
+.workouts-actions {
+    display: flex;
+    gap: 14px;
+}
+
+/* Shared button appearance */
+.action-btn {
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    color: #ffffff;
+    transition: 0.25s ease;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    text-decoration: none;
+}
+
+/* Edit button */
+.edit-btn {
+    background-color: #253b71;
+}
+
+.edit-btn:hover {
+    background-color: #1d2f5c;
+    transform: translateY(-2px);
+}
+
+/* Delete button */
+.delete-btn {
+    background-color: #d8314b;
+}
+
+.delete-btn:hover {
+    background-color: #b71f3a;
+    transform: translateY(-2px);
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
