@@ -53,6 +53,7 @@ All code follows examples from INFR3120 course materials
 
   External documentation referenced only:    
  > Express.js documentation
+
  > https://www.w3schools.com/jsref/jsref_push.asp - fatimah used this to learn how to implement an array into our project
 
   
