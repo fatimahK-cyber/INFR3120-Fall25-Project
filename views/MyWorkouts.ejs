@@ -1,4 +1,5 @@
-<% const page = 'list'; %>
+<% const page = 'list'; %> <!-- Current page identifier -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,39 +11,34 @@
 <body>
 
 <header class="header">
-
+    <!-- Logo and site name -->
     <div class="logo">
         <img src="/images/logo-workit.PNG" alt="Workit Logo" class="logo-img">
         <h1 class="site-name">Workit</h1>
     </div>
 
+    <!-- Navigation menu -->
     <nav class="nav">
         <a href="/" class="nav-link">Home</a>
         <a href="/workouts/add" class="nav-link">Add Workout</a>
         <a href="/workouts" class="nav-link nav-link-active">My Workouts</a>
     </nav>
-
 </header>
-
 
 <main class="hero workouts-hero">
     <h2 class="workouts-heading-main">Your Workouts</h2>
 
-
     <% if (workouts.length === 0) { %>
-
+        <!-- Message if no workouts exist -->
         <p class="description">
             You don't have any workouts yet.
             <a href="/workouts/new">Add your first workout</a> to get started.
         </p>
-
     <% } else { %>
-
+        <!-- Display workouts table -->
         <div class="workouts-wrapper">
             <div class="workouts-card">
-
                 <h3 class="workouts-title">Workout Summary</h3>
-
                 <table class="workouts-table">
                     <thead>
                         <tr>
@@ -53,7 +49,6 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         <% workouts.forEach(w => { %>
                         <tr>
@@ -61,12 +56,9 @@
                             <td><%= w.type %></td>
                             <td><%= w.duration %> min</td>
                             <td><%= w.date %></td>
-
                             <td class="workouts-actions">
-                                <a href="/workouts/<%= w.id %>/edit" class="action-btn edit-btn">
-                                    Edit
-                                </a>
-
+                                <!-- Edit and Delete buttons -->
+                                <a href="/workouts/<%= w.id %>/edit" class="action-btn edit-btn">Edit</a>
                                 <form action="/workouts/<%= w.id %>/delete" method="POST">
                                     <button type="submit" class="action-btn delete-btn"
                                             onclick="return confirm('Delete this workout?');">
@@ -78,13 +70,10 @@
                         <% }) %>
                     </tbody>
                 </table>
-
             </div>
         </div>
-
     <% } %>
 </main>
-
 
 <footer>
     <p>&copy; 2025 Workit · INFR3120 Project</p>
