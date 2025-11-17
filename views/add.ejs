@@ -1,20 +1,23 @@
-<% const page = 'add'; %>
+<% const page = 'add'; %> <!-- Current page identifier -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Dynamically set page title based on adding or updating a workout -->
     <title><%= workout ? "Update Workout" : "Add Workout" %></title>
     <link rel="stylesheet" href="/css/styles.css">
-    
 </head>
 <body>
 
 <header class="header">
+    <!-- Logo and site name -->
     <div class="logo">
         <img src="/images/logo-workit.PNG" alt="Workit Logo" class="logo-img">
         <h1 class="site-name">Workit</h1>
     </div>
 
+    <!-- Navigation menu -->
     <nav class="nav">
         <a href="/" class="nav-link">Home</a>
         <a href="/workouts/add" class="nav-link nav-link-active">Add Workout</a>
@@ -23,37 +26,48 @@
 </header>
 
 <main class="hero workouts-hero">
+    <!-- Heading changes if editing an existing workout -->
     <h2 class="workouts-heading-main"><%= workout ? "Update Workout" : "Add a New Workout" %></h2>
 
     <div class="workouts-wrapper">
         <div class="workouts-card">
 
+            <!-- Workout form (using Bootstrap form classes for styling) -->
             <form action="/workouts" method="POST" class="workout-form">
                 <% if (workout) { %>
+                    <!-- Hidden input for ID when updating -->
                     <input type="hidden" name="id" value="<%= workout.id %>">
                 <% } %>
 
+                <!-- Form fields using Bootstrap classes -->
                 <div class="form-group">
                     <label for="name">Workout Name</label>
-                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter workout name" value="<%= workout ? workout.name : '' %>" required>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter workout name" 
+                           value="<%= workout ? workout.name : '' %>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="type">Workout Type</label>
-                    <input type="text" id="type" name="type" class="form-control" placeholder="Cardio, Strength..." value="<%= workout ? workout.type : '' %>" required>
+                    <input type="text" id="type" name="type" class="form-control" placeholder="Cardio, Strength..." 
+                           value="<%= workout ? workout.type : '' %>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="duration">Duration (minutes)</label>
-                    <input type="number" id="duration" name="duration" class="form-control" placeholder="Duration in minutes" value="<%= workout ? workout.duration : '' %>" required>
+                    <input type="number" id="duration" name="duration" class="form-control" placeholder="Duration in minutes" 
+                           value="<%= workout ? workout.duration : '' %>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="date">Date</label>
-                    <input type="date" id="date" name="date" class="form-control" value="<%= workout ? workout.date : '' %>" required>
+                    <input type="date" id="date" name="date" class="form-control" 
+                           value="<%= workout ? workout.date : '' %>" required>
                 </div>
 
-                <button type="submit" class="btn hero-btn"><%= workout ? "Update Workout" : "Add Workout" %></button>
+                <!-- Submit button -->
+                <button type="submit" class="btn hero-btn">
+                    <%= workout ? "Update Workout" : "Add Workout" %>
+                </button>
             </form>
 
         </div>
