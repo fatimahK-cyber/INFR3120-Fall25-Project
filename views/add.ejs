@@ -3,8 +3,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Workout</title>
+    <title><%= workout ? "Update Workout" : "Add Workout" %></title>
     <link rel="stylesheet" href="/css/styles.css">
+    
 </head>
 <body>
 
@@ -22,38 +23,39 @@
 </header>
 
 <main class="hero workouts-hero">
-    <h2 class="workouts-heading-main">Add a New Workout</h2>
+    <h2 class="workouts-heading-main"><%= workout ? "Update Workout" : "Add a New Workout" %></h2>
 
     <div class="workouts-wrapper">
         <div class="workouts-card">
+
             <form action="/workouts" method="POST" class="workout-form">
+                <% if (workout) { %>
+                    <input type="hidden" name="id" value="<%= workout.id %>">
+                <% } %>
+
                 <div class="form-group">
                     <label for="name">Workout Name</label>
-                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter workout name" required>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter workout name" value="<%= workout ? workout.name : '' %>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="type">Workout Type</label>
-                    <input type="text" id="type" name="type" class="form-control" placeholder="Cardio, Strength..." required>
+                    <input type="text" id="type" name="type" class="form-control" placeholder="Cardio, Strength..." value="<%= workout ? workout.type : '' %>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="duration">Duration (minutes)</label>
-                    <input type="number" id="duration" name="duration" class="form-control" placeholder="Duration in minutes" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="calories">Calories Burned</label>
-                    <input type="number" id="calories" name="calories" class="form-control" placeholder="Calories burned" required>
+                    <input type="number" id="duration" name="duration" class="form-control" placeholder="Duration in minutes" value="<%= workout ? workout.duration : '' %>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="date">Date</label>
-                    <input type="date" id="date" name="date" class="form-control" required>
+                    <input type="date" id="date" name="date" class="form-control" value="<%= workout ? workout.date : '' %>" required>
                 </div>
 
-                <button type="submit" class="action-btn edit-btn">Add Workout</button>
+                <button type="submit" class="btn hero-btn"><%= workout ? "Update Workout" : "Add Workout" %></button>
             </form>
+
         </div>
     </div>
 </main>
