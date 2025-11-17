@@ -15,7 +15,8 @@ WorkIt is a simple fitness tracker web application built using   Node.js, Expres
  > Built the Add Workout page  
  > Created form fields (name, type, duration, date)  
  > Implemented POST /workouts (Create)  
- > Connected form back to My Workouts  
+ > Connected form back to My Workouts
+ > added comments on some pages and deployed on cloud 
 
   Izzat Ikram    
  > Created the My Workouts page  
@@ -51,6 +52,7 @@ All code follows examples from INFR3120 course materials
  > Basic client/server flow  
 
   External documentation referenced only:    
- > Express.js documentation  
+ > Express.js documentation
+ > https://www.w3schools.com/jsref/jsref_push.asp - fatimah used this to learn how to implement an array into our project
 
   
