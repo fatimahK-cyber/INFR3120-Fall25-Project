@@ -33,3 +33,7 @@ app.listen(3000, () => {
     console.log("Workit running on http://localhost:3000");
 });
 
+// IMPORT SIGNUP ROUTES
+const signupRouter = require("./routes/signup");
+app.use(signupRouter);
+
