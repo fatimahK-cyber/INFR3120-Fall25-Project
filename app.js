@@ -31,17 +31,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 
-
-
-
-
 // IMPORT SIGNUP ROUTES
-const signupRouter = require("./routes/signup.js");
-app.use("/signup", signupRouter);
+const signupRouter = require("./routes/signup");
+app.use(signupRouter);
 
 // IMPORT SIGNIN ROUTES
-const signinRouter = require("./routes/signin.js");
-app.use("/signin", signinRouter);
+const signinRouter = require("./routes/signin");
+app.use(signinRouter);
 
 
 // IMPORT WORKOUT ROUTES
@@ -65,6 +61,7 @@ app.use("/workouts", workoutsRouter);
 app.listen(3000, () => {
     console.log("Workit running on http://localhost:3000");
 });
+
 
 
 
