@@ -1,9 +1,22 @@
 // IMPORT EXPRESS (from MEAN slides)
 const express = require("express");
 const path = require("path");
+let mongoose = require('mongoose');
+let DB = require('./config/db');
+
+
+
 
 // CREATE APP
 const app = express();
+
+//test DB connection
+mongoose.connect(DB.URI);
+let mongoDB = mongoose.connection;
+mongoDB.on('error', console.error.bind(console, 'Connection Error:'));
+mongoDB.once('open', () => {
+    console.log('Connected to MongoDB');
+});
 
 // CONFIGURE VIEW ENGINE (EJS)
 app.set("view engine", "ejs");
@@ -41,7 +54,9 @@ app.use("/", signupRouter);
 
 
 // IMPORT WORKOUT ROUTES
-const workoutsRouter = require("./routes/index");
+const indexRouter = require("./routes/index");
+// IMPORT WORKOUT ROUTES
+const workoutsRouter = require("./routes/workouts");
 
 
 // HOME PAGE ROUTE
@@ -51,7 +66,9 @@ app.get("/", (req, res) => {
 
 
 // MOUNT WORKOUT ROUTES
+app.use("/dashboard", indexRouter);
 app.use("/workouts", workoutsRouter);
+
 
 // START SERVER
 app.listen(3000, () => {
@@ -60,7 +77,8 @@ app.listen(3000, () => {
 
 // IMPORT SIGNUP ROUTES
 const signupRouter = require("./routes/signup");
-app.use(signupRouter);
+app.use("/signup", signupRouter);
+
 
 
 
