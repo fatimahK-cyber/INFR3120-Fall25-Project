@@ -11,6 +11,10 @@ router.get("/signin", (req, res) => {
 router.post("/signin", async (req, res, next) => {
   const { username, password } = req.body;
 
+  // in app.js
+app.use('/', signinRouter);   // ✅ keep paths in router as '/signin'
+
+
   try {
     // look up user in MongoDB
     const user = await User.findOne({ username }).exec();

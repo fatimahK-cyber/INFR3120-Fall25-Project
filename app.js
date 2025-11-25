@@ -55,6 +55,8 @@ app.get("/", (req, res) => {
 // MOUNT WORKOUT ROUTES
 app.use("/dashboard", indexRouter);
 app.use("/workouts", workoutsRouter);
+//app.use('/', signinRouter);
+
 
 
 // START SERVER
