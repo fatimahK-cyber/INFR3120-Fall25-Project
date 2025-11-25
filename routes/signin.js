@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/users.models");
+const User = require("../models/users.models.js");
 
 // GET /signin – show the sign in form
 router.get("/signin", (req, res) => {
