@@ -1,27 +1,34 @@
 const express = require("express");
 const router = express.Router();
+const User = require("../models/users.models.js");
 
-const { saveNewUser, checkEmailExists } = require("../config/db.js");
-
+// GET /signup
 router.get("/signup", (req, res) => {
-    res.render("signup", { error: null });
+    // use "message" because your EJS is using message
+    res.render("signup", { message: "" });
 });
 
+// POST /signup
 router.post("/signup", async (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, email, password, confirmPassword } = req.body;
 
-    if (!username || !email || !password) {
-        return res.render("signup", { error: "All fields are required." });
+    // basic required fields
+    if (!username || !email || !password || !confirmPassword) {
+        return res.render("signup", { message: "All fields are required." });
+    }
+
+    // check passwords match
+    if (password !== confirmPassword) {
+        return res.render("signup", { message: "Passwords do not match." });
     }
 
     try {
         const emailTaken = await checkEmailExists(email);
 
         if (emailTaken) {
-            return res.render("signup", { error: "Email already in use." });
+            return res.render("signup", { message: "Email already in use." });
         }
 
-  
         const newUser = {
             username,
             email,
@@ -33,7 +40,7 @@ router.post("/signup", async (req, res) => {
         res.redirect("/login");
     } catch (err) {
         console.error(err);
-        res.render("signup", { error: "Something went wrong." });
+        res.render("signup", { message: "Something went wrong." });
     }
 });
 

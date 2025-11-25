@@ -1,30 +1,71 @@
-<% include partials/header %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Sign Up - WorkIt</title>
-</head>
-<body>
+<%- include ../partials/header.ejs %>
+<%- include ../partials/main_nav.ejs %>
 
-    <h1>Create Your Account</h1>
-    <% if (error) { %>
-        <p style="color: red;"><%= error %></p>
+<main class="container">
+    <% if (message.length > 0) { %>
+        <div class="alert alert-danger">
+            <%= message %>
+        </div>
     <% } %>
 
-    <form action="/signup" method="POST">
-        <label>Username</label><br>
-        <input type="text" name="username" required><br><br>
+    <div class="row">
+        <div class="offset-md-4 col-md-4">
+            <h1>Please Sign Up</h1>
 
-        <label>Email</label><br>
-        <input type="email" name="email" required><br><br>
+            <form method="post" autocomplete="off">
+                <fieldset class="form-group">
+                    <label for="username"></label>
+                    <input 
+                        type="text" 
+                        class="form-control"
+                        name="username"
+                        placeholder="Enter username"
+                        id="username"
+                        required 
+                        autofocus
+                    >
+                </fieldset>
 
-        <label>Password</label><br>
-        <input type="password" name="password" required><br><br>
+                <fieldset class="form-group">
+                    <label for="password"></label>
+                    <input 
+                        type="password" 
+                        class="form-control"
+                        name="password"
+                        placeholder="Enter password"
+                        id="password"
+                        required
+                    >
+                </fieldset>
 
-        <button type="submit">Sign Up</button>
-    </form>
+                <fieldset class="form-group">
+                    <label for="confirmPassword"></label>
+                    <input 
+                        type="password" 
+                        class="form-control"
+                        name="confirmPassword"
+                        placeholder="Confirm password"
+                        id="confirmPassword"
+                        required
+                    >
+                </fieldset>
 
-    <p>Already have an account? <a href="/login">Login</a></p>
-</body>
-</html>
+                <fieldset class="form-group text-right">
+                    <input 
+                        type="submit" 
+                        class="btn btn-success" 
+                        value="Sign Up"
+                    >
+                    <input 
+                        type="button" 
+                        class="btn btn-warning" 
+                        value="Cancel"
+                        onclick="window.location='/'"
+                    >
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+</main>
+
