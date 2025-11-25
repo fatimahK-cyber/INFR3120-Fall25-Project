@@ -44,5 +44,9 @@ router.post("/signup", async (req, res) => {
         res.render("signup", { error: "Something went wrong." });
     }
 });
+
+
+ 
+
 // Export the router
 module.exports = router;
