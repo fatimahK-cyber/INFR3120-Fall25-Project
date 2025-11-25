@@ -25,8 +25,33 @@ app.set("views", path.join(__dirname, "views"));
 // BODY PARSER (needed for forms)
 app.use(express.urlencoded({ extended: true }));
 
+
+
 // SERVE STATIC FILES (CSS, images)
 app.use(express.static(path.join(__dirname, "public")));
+
+
+app.use(
+  session({
+    secret: "workit-secret-key",   // any random string
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+// make the current user available in all EJS views
+app.use((req, res, next) => {
+  res.locals.currentUser = req.session.user || null;
+  next();
+});
+
+
+const signinRouter = require("./routes/signin");
+const signupRouter = require("./routes/signup");
+
+app.use("/", signinRouter);
+app.use("/", signupRouter);
+
 
 // IMPORT WORKOUT ROUTES
 const indexRouter = require("./routes/index");
@@ -54,4 +79,8 @@ app.listen(3000, () => {
 const signupRouter = require("./routes/signup");
 app.use("/signup", signupRouter);
 
+
+
+
+ 
 
