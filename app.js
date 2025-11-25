@@ -4,6 +4,9 @@ const path = require("path");
 let mongoose = require('mongoose');
 let DB = require('./config/db');
 
+
+
+
 // CREATE APP
 const app = express();
 
@@ -26,8 +29,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // IMPORT WORKOUT ROUTES
-const workoutsRouter = require("./routes/index");
-
+const indexRouter = require("./routes/index");
+// IMPORT WORKOUT ROUTES
+const workoutsRouter = require("./routes/workouts");
 
 
 // HOME PAGE ROUTE
@@ -37,7 +41,9 @@ app.get("/", (req, res) => {
 
 
 // MOUNT WORKOUT ROUTES
+app.use("/dashboard", indexRouter);
 app.use("/workouts", workoutsRouter);
+
 
 // START SERVER
 app.listen(3000, () => {
@@ -46,5 +52,6 @@ app.listen(3000, () => {
 
 // IMPORT SIGNUP ROUTES
 const signupRouter = require("./routes/signup");
-app.use(signupRouter);
+app.use("/signup", signupRouter);
+
 

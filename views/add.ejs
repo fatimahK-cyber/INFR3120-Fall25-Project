@@ -1,13 +1,15 @@
 <% const page = 'add'; %> <!-- Current page identifier -->
+<% include partials/header %>
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Dynamically set page title based on adding or updating a workout -->
-    <title><%= workout ? "Update Workout" : "Add Workout" %></title>
+    <title>Add Workout</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
+
 <body>
 
 <header class="header">
@@ -27,48 +29,55 @@
 
 <main class="hero workouts-hero">
     <!-- Heading changes if editing an existing workout -->
-    <h2 class="workouts-heading-main"><%= workout ? "Update Workout" : "Add a New Workout" %></h2>
+    <h2 class="workouts-heading-main">Add a New Workout</h2>
+
 
     <div class="workouts-wrapper">
         <div class="workouts-card">
 
             <!-- Workout form (using Bootstrap form classes for styling) -->
-            <form action="/workouts" method="POST" class="workout-form">
-                <% if (workout) { %>
-                    <!-- Hidden input for ID when updating -->
-                    <input type="hidden" name="id" value="<%= workout.id %>">
-                <% } %>
+            <form id ="form" action="/books/add" method="POST">
+    <div class="form-group">
+      <label for="Name">Name</label>
+      <input type="text" class="form-control" id="Name" name="Name" required 
+      placeholder="Enter the workout name"
+      > 
 
-                <!-- Form fields using Bootstrap classes -->
-                <div class="form-group">
-                    <label for="name">Workout Name</label>
-                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter workout name" 
-                           value="<%= workout ? workout.name : '' %>" required>
-                </div>
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="Type">Type</label>
+      <input type="text" class="form-control" id="Type" name="Type" required 
+      placeholder="Enter the workout type"
+      >
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="Duration">Duration (in minutes)</label>
+      <input type="number" class="form-control" id="Duration" name="Duration" required 
+      placeholder="Enter the workout duration"
+      >
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="Date">Date</label>
+      <input type="date" class="form-control" id="Date" name="Date" required 
+      placeholder="Enter the workout date"
+      >
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="review">Review</label>
+      <textarea class="form-control" id="review" name="review" rows="3" required
+        placeholder="Enter your review"></textarea>
+    </div>
+    <br>
+    <button id ="submit" type="submit" class="btn btn-primary">Add Book</button>
+    
+    <a href="/books" class="btn btn-secondary">Cancel</a>
 
-                <div class="form-group">
-                    <label for="type">Workout Type</label>
-                    <input type="text" id="type" name="type" class="form-control" placeholder="Cardio, Strength..." 
-                           value="<%= workout ? workout.type : '' %>" required>
-                </div>
 
-                <div class="form-group">
-                    <label for="duration">Duration (minutes)</label>
-                    <input type="number" id="duration" name="duration" class="form-control" placeholder="Duration in minutes" 
-                           value="<%= workout ? workout.duration : '' %>" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="date">Date</label>
-                    <input type="date" id="date" name="date" class="form-control" 
-                           value="<%= workout ? workout.date : '' %>" required>
-                </div>
-
-                <!-- Submit button -->
-                <button type="submit" class="btn hero-btn">
-                    <%= workout ? "Update Workout" : "Add Workout" %>
-                </button>
-            </form>
+  </form>
 
         </div>
     </div>
@@ -80,3 +89,5 @@
 
 </body>
 </html>
+
+<% include partials/footer %>

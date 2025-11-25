@@ -1,31 +1,124 @@
-let workouts = [
-    { id: 1, name: "Push Ups", type: "Strength", duration: 20, date: "2025-11-16" },
-    { id: 2, name: "Squats", type: "Strength", duration: 15, date: "2025-11-15" }
-];
 
-// Return all workouts
-function getAll() {
-    return workouts;
-}
+let express = require('express');
+let router = express.Router();
+let mongoose = require('mongoose');
+let Workout = require('../models/workouts.models.js');
 
-// Add a workout
-function addWorkout(workout) {
-    workout.id = workouts.length ? workouts[workouts.length - 1].id + 1 : 1;
-    workouts.push(workout);
-}
+//CRUD Operations
 
-// Update a workout by ID
-function updateWorkout(id, updatedWorkout) {
-    const index = workouts.findIndex(w => w.id == id);
-    if (index !== -1) {
-        updatedWorkout.id = id; // keep same ID
-        workouts[index] = updatedWorkout;
+/* READ */
+router.get('/', async(req, res, next)=> {
+    try {
+        const workoutList = await Workout.find();
+        res.render('MyWorkouts', {title: 'My Workouts', workoutList: workoutList});
+
     }
-}
+    catch(err) {
+        console.error(err);
+        next(err);
+        }
+    
+    })
 
-// Delete by ID
-function deleteById(id) {
-    workouts = workouts.filter(w => w.id != id);
-}
+/* get the data  - create operation*/
+router.get('/add', async(req, res, next)=> {
+    try
+    {
+        res.render('add', {title: 'Add workout'});
+    }
+    catch(err) {
+        console.error(err);
+        next(err);
+        }
+    
+    })
 
-module.exports = { getAll, addWorkout, updateWorkout, deleteById };
+
+/* post the data  - create operation*/
+router.post('/add', async(req, res, next)=> {
+    try
+    {
+        let newWorkout = Workout({
+            "Name": req.body.Name,
+            "Type": req.body.Type,
+            "Duration": req.body.Duration,
+            "Date": req.body.Date,
+
+        });
+        Workout.create(newWorkout).then(()=>{
+            res.redirect('/add');
+        });
+    }
+    catch(err) {
+        console.error(err);
+        next(err);
+        }
+    
+    })
+
+
+/* get the route for update  - update operation*/
+router.get('/edit/:id', async(req, res, next)=> {
+    try
+    {
+        const id = req.params.id;
+        const WorkoutToEdit = await Workout.findById(id);
+        res.render('edit', {
+            title: 'Edit Workout',
+             book: WorkoutToEdit
+            });
+    }
+    catch(err) {
+        console.error(err);
+        next(err);
+        }
+    }
+    )
+
+
+/* post the route for update  - create operation*/
+router.post('/edit/:id', async(req, res, next)=> {
+    try
+    {
+        let id = req.params.id;
+        let updatedWorkout = Workout({
+            "_id": id,
+            "Name": req.body.Name,
+            "Type": req.body.Type,
+            "Duration": req.body.Duration,
+            "Date": req.body.Date
+        });
+        Book.findByIdAndUpdate(id, updatedWorkout).then(()=>{
+            res.redirect('/MyWorkouts');
+        });
+    }
+    catch(err) {
+        console.error(err);
+        next(err);
+        }
+    
+    })
+
+
+/* get the route for performing delete  - delete operation*/
+router.get('/delete/:id', async(req, res, next)=> {
+    try
+    {
+        let id = req.params.id;
+        Workout.deleteOne({_id: id}).then(()=>{
+            res.redirect('/MyWorkouts');
+        })
+    }
+    catch(err) {
+        console.error(err);
+        next(err);
+        }
+    
+    })
+
+
+
+
+
+
+module.exports = router;
