@@ -1,38 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<% include partials/header %>
 
-    <!-- Title of the page. This shows up on the browser tab and clearly identifies the app as Workit.-->
-    <title>Workit - Home</title>
-
-    <!--  Linking to my main CSS file. The path /css/styles.css works because Express serves the /public folder as static files. -->
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
-
-<body>
-    <%- include("partials/header") %>
-</body>
-
-<!-- hero section: This is the main part of the landing page. It explains what Workit is and gives the user a clear call-to-action.-->
 <main class="hero">
-    <!--  Main headline for the home page. I’m using this to quickly communicate the purpose of the app.-->
+    <!-- Main headline for the home page -->
     <h2>Your Fitness. Your Progress. Your Way.</h2>
 
-    <!-- Description / "About" style text. This is basically our company/app introduction explaining what Workit does in simple language, which matches the assignment requirement for a short description.-->
+    <!-- Description / About text -->
     <p class="description">
         Workit helps you track workouts, stay consistent, and see your progress.
         It is a simple fitness tracker built to support your health goals.
     </p>
 
-    <!-- hero button: This is the main call-to-action button on the page. When the user clicks this, they go directly to the Add Workout page,where a new workout object will be created.This button is my "hero button that leads to creating a new workout" from the assignment.-->
+    <!-- Hero button linking to Add Workout page -->
     <a href="/workouts/add" class="btn hero-btn">Add New Workout</a>
 </main>
 
-<!-- footer section: Simple footer with the year and course info. This helps make the page feel complete and also shows that this is for my INFR3120 project.-->
 <footer>
     <p>&copy; 2025 Workit · INFR3120 Project</p>
 </footer>
-
-</body>
-</html>

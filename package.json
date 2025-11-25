@@ -13,9 +13,12 @@
   "type": "commonjs",
   "dependencies": {
     "bcryptjs": "^3.0.3",
+    "bootstrap": "^5.3.8",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
+    "install": "^0.13.0",
     "mongoos": "^0.0.1-security",
-    "mongoose": "^9.0.0"
+    "mongoose": "^9.0.0",
+    "popper.js": "^1.16.1"
   }
 }
