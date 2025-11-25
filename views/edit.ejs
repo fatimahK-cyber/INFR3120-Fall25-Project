@@ -1,2 +1,74 @@
-<%- include('partials/header') %>
+<% include partials/header %>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Workout</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+
+<main class="hero workouts-hero">
+    <h2 class="workouts-heading-main">Update Workout</h2>
+
+    <div class="workouts-wrapper">
+        <div class="workouts-card">
+            <form id="form" action="/MyWorkouts/edit/<%= book._id %>" method="POST">
+
+                <div class="form-group">
+                    <label for="Name">Name</label>
+                    <input type="text" class="form-control" id="Name" name="Name" required 
+                    placeholder="Enter the workout name">
+                </div>
+
+                <br>
+
+                <div class="form-group">
+                    <label for="Type">Type</label>
+                    <input type="text" class="form-control" id="Type" name="Type" required 
+                    placeholder="Enter the workout type">
+                </div>
+
+                <br>
+
+                <div class="form-group">
+                    <label for="Duration">Duration (in minutes)</label>
+                    <input type="number" class="form-control" id="Duration" name="Duration" required 
+                    placeholder="Enter the workout duration">
+                </div>
+
+                <br>
+
+                <div class="form-group">
+                    <label for="Date">Date</label>
+                    <input type="date" class="form-control" id="Date" name="Date" required>
+                </div>
+
+                <br>
+
+                <div class="form-group">
+                    <label for="review">Review</label>
+                    <textarea class="form-control" id="review" name="review" rows="3" required
+                    placeholder="Enter your review"></textarea>
+                </div>
+
+                <br>
+
+                <button id="submit" type="submit" class="btn btn-primary">Add Workout</button>
+                <a href="/workouts" class="btn btn-secondary">Cancel</a>
+
+            </form>
+        </div>
+    </div>
+</main>
+
+
+
+</body>
+</html>
+
 
