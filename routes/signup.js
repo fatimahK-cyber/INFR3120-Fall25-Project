@@ -21,10 +21,14 @@ router.post("/signup", async (req, res) => {
             return res.render("signup", { error: "Email already in use." });
         }
 
+// Hash the password before saving
+        const hashed = await bcrypt.hash(password, 10);
+
+        // Create the user object to send to the DB handler
         const newUser = {
             username,
             email,
-            password   // stored as plain text
+            password: hashed,
         };
 
         await saveNewUser(newUser);

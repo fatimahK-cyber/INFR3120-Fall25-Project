@@ -7,26 +7,13 @@
     <title>My Workouts</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-
 <body>
 
-<header class="header">
-    <!-- Logo and site name -->
-    <div class="logo">
-        <img src="/images/logo-workit.PNG" alt="Workit Logo" class="logo-img">
-        <h1 class="site-name">Workit</h1>
-    </div>
-
-    <!-- Navigation menu -->
-    <nav class="nav">
-        <a href="/" class="nav-link">Home</a>
-        <a href="/workouts/add" class="nav-link">Add Workout</a>
-        <a href="/workouts" class="nav-link nav-link-active">My Workouts</a>
-    </nav>
-</header>
+<%- include("partials/header") %>   
 
 <main class="hero workouts-hero">
     <h2 class="workouts-heading-main">Your Workouts</h2>
+
 
     <% if (workouts.length === 0) { %>
         <!-- Message if no workouts exist -->

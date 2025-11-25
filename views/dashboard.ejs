@@ -11,31 +11,8 @@
 </head>
 
 <body>
-
-<!-- header section: This is the top section of my page. It includes: My Workit logo image, The site name, Navigation links to the rest of the app-->
-<header class="header">
-
-    <!-- LOGO and SITE NAME: I’m grouping the logo image and the Workit title together so they appear as one unit.-->
-    <div class="logo">
-        <!-- Custom Workit logo image that I created. The file is stored in /public/images as logo-workit.PNG.-->
-        <img src="/images/logo-workit.PNG" alt="Workit Logo" class="logo-img">
-
-        <!-- Main site name that the user sees on every page. -->
-        <h1 class="site-name">Workit</h1>
-    </div>
-
-    <!-- navigation bar: These links connect the landing page to the other main parts of the app.Home (this page), Add Workout (Create), My Workouts (Read/Update/Delete handled by the other pages)-->
-    <nav class="nav">
-        <!-- Link that brings the user back to the landing page. -->
-        <a href="/" class="nav-link">Home</a>
-
-        <!-- Link to the Add Workout page. This is where the user will create a new workout entry.-->
-        <a href="/workouts/add" class="nav-link">Add Workout</a>
-
-        <!-- Link to the My Workouts page. This will show a list of all workouts so the user can manage them.-->
-        <a href="/workouts" class="nav-link">My Workouts</a>
-    </nav>
-</header>
+    <%- include("partials/header") %>
+</body>
 
 <!-- hero section: This is the main part of the landing page. It explains what Workit is and gives the user a clear call-to-action.-->
 <main class="hero">
