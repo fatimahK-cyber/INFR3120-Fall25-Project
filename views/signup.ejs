@@ -1,11 +1,15 @@
-<%- include ../partials/header.ejs %>
-<%- include ../partials/main_nav.ejs %>
+<%- include('partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up - WorkIt</title>
+</head>
+<body>
 
-<main class="container">
-    <% if (message.length > 0) { %>
-        <div class="alert alert-danger">
-            <%= message %>
-        </div>
+    <h1>Create Your Account</h1>
+    <% if (error) { %>
+        <p style="color: red;"><%= error %></p>
     <% } %>
 
     <div class="row">
@@ -65,7 +69,6 @@
                 </fieldset>
             </form>
 
-        </div>
-    </div>
-</main>
-
+    <p>Already have an account? <a href="/signin">Sign In</a></p>
+</body>
+</html>

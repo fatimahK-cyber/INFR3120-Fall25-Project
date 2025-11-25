@@ -37,7 +37,7 @@ router.post("/signup", async (req, res) => {
 
         await saveNewUser(newUser);
 
-        res.redirect("/login");
+        res.redirect("/signin");
     } catch (err) {
         console.error(err);
         res.render("signup", { message: "Something went wrong." });
