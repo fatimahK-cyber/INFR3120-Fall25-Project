@@ -1,3 +1,4 @@
+// routes/signin.js
 const express = require("express");
 const router = express.Router();
 const User = require("../models/users.models");
@@ -10,10 +11,6 @@ router.get("/signin", (req, res) => {
 // POST /signin – handle sign in submit
 router.post("/signin", async (req, res, next) => {
   const { username, password } = req.body;
-
-  // in app.js
-app.use('/', signinRouter);   // ✅ keep paths in router as '/signin'
-
 
   try {
     // look up user in MongoDB
@@ -31,7 +28,7 @@ app.use('/', signinRouter);   // ✅ keep paths in router as '/signin'
     };
 
     // go to dashboard or workouts
-    res.redirect("/dashboard"); // or "/" or "/workouts"
+    res.redirect("/dashboard");
   } catch (err) {
     next(err);
   }

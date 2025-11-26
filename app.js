@@ -33,11 +33,11 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // IMPORT SIGNUP ROUTES
 const signupRouter = require("./routes/signup");
-app.use(signupRouter);
+app.use("/",signupRouter);
 
 // IMPORT SIGNIN ROUTES
 const signinRouter = require("./routes/signin");
-app.use(signinRouter);
+app.use("/",signinRouter);
 
 
 // IMPORT WORKOUT ROUTES
