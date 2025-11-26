@@ -1,25 +1,26 @@
-// IMPORT EXPRESS (from MEAN slides)
+// IMPORT EXPRESS AND OTHER DEPENDENCIES
 const express = require("express");
 const path = require("path");
-let mongoose = require('mongoose');
-let DB = require('./config/db');
+const mongoose = require('mongoose');
 const session = require("express-session");
 
+// LOAD ENV VARIABLES
+require('dotenv').config();
 
-
+// IMPORT DB CONFIG
+const DB = require('./config/db');
 
 // CREATE APP
 const app = express();
 
-//test DB connection
+// TEST DB CONNECTION
 mongoose.connect(DB.URI);
-let mongoDB = mongoose.connection;
+
+const mongoDB = mongoose.connection;
 mongoDB.on('error', console.error.bind(console, 'Connection Error:'));
 mongoDB.once('open', () => {
     console.log('Connected to MongoDB');
 });
-
-
 
 // CONFIGURE VIEW ENGINE (EJS)
 app.set("view engine", "ejs");
@@ -28,12 +29,10 @@ app.set("views", path.join(__dirname, "views"));
 // BODY PARSER (needed for forms)
 app.use(express.urlencoded({ extended: true }));
 
-
-
 // SERVE STATIC FILES (CSS, images)
 app.use(express.static(path.join(__dirname, "public")));
 
-
+// SESSION CONFIG
 app.use(
   session({
     secret: "workit-secret",
@@ -42,59 +41,32 @@ app.use(
   })
 );
 
-// add this
+// MAKE SESSION AVAILABLE IN EJS
 app.use((req, res, next) => {
-  res.locals.session = req.session;  // EJS can use `session`
+  res.locals.session = req.session;
   next();
 });
 
-
-
-
-
-// IMPORT SIGNUP ROUTES
+// ROUTES
 const signupRouter = require("./routes/signup");
-app.use("/",signupRouter);
-
-//signin routes 
 const signinRouter = require("./routes/signin");
-app.use("/", signinRouter);
-
-//signout route
 const signoutRouter = require("./routes/signout");
-app.use("/", signoutRouter);
-
-
-
-// IMPORT WORKOUT ROUTES
 const indexRouter = require("./routes/index");
-// IMPORT WORKOUT ROUTES
 const workoutsRouter = require("./routes/workouts");
 
+// USE ROUTES
+app.use("/", signupRouter);
+app.use("/", signinRouter);
+app.use("/", signoutRouter);
+app.use("/dashboard", indexRouter);
+app.use("/workouts", workoutsRouter);
 
 // HOME PAGE ROUTE
 app.get("/", (req, res) => {
     res.render("dashboard", { session: req.session });
-
 });
-
-
-// MOUNT WORKOUT ROUTES
-app.use("/dashboard", indexRouter);
-app.use("/workouts", workoutsRouter);
-//app.use('/', signinRouter);
-
-
 
 // START SERVER
 app.listen(3000, () => {
     console.log("Workit running on http://localhost:3000");
 });
-
-
-
-
-
-
- 
-
