@@ -1,6 +1,6 @@
 function requireSignIn(req, res, next) {
     if (!req.session || !req.session.user) {
-        return res.redirect("/login");
+        return res.redirect("/signin");
     }
     next();
 }
