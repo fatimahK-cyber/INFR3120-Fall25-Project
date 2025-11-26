@@ -5,7 +5,7 @@
 <main class="hero workouts-hero">
     <h2 class="workouts-heading-main">Your Workouts</h2>
 
-    <% if (!workoutList || workoutList.length === 0) { %>
+    <% if (!workouts || workouts.length === 0) { %>
         <!-- Message if no workouts exist -->
         <p class="description">
             You don't have any workouts yet.
@@ -27,7 +27,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% workoutList.forEach(function (w) { %>
+                        <% workouts.forEach(function (w) { %>
                             <tr>
                                 <!-- NOTE: field names match your Mongoose model:
                                      "Name", "Type", "Duration", "Date" -->

@@ -78,27 +78,27 @@ router.get('/edit/:id', requireSignIn, async (req, res, next) => {
 
 /* POST edit form - update operation */
 router.post('/edit/:id', requireSignIn, async (req, res, next) => {
-    try {
-        let id = req.params.id;
-        let updatedWorkout = Workout({
-            "_id": id,
-            "Name": req.body.Name,
-            "Type": req.body.Type,
-            "Duration": req.body.Duration,
-            "Date": req.body.Date,
-            user: req.session.user._id,
-        });
+  try {
+    const id = req.params.id;
 
-        await Workout.findByIdAndUpdate(id, updatedWorkout);
+    await Workout.findByIdAndUpdate(
+      id,
+      {
+        Name: req.body.Name,
+        Type: req.body.Type,
+        Duration: req.body.Duration,
+        Date: req.body.Date,
+        user: req.session.user._id,
+      }
+    );
 
-        // CHANGED: go back to /workouts instead of /MyWorkouts
-        res.redirect('/workouts');
-    }
-    catch (err) {
-        console.error(err);
-        next(err);
-    }
+    res.redirect('/workouts');
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
 });
+
 
 /* DELETE workout - delete operation */
 router.get('/delete/:id', requireSignIn, async (req, res, next) => {

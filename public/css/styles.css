@@ -418,6 +418,17 @@ footer {
 .delete-btn {
     background-color: #d8314b;
 }
+/* Secondary button (Cancel) */
+.cancel-btn {
+  background-color: #fff;          /* white pill */
+  color: #213c7a;                  /* dark text */
+  border: 1px solid #213c7a;       /* outline so it stands out */
+}
+
+/* Optional hover */
+.cancel-btn:hover {
+  background-color: #f4f4ff;       /* light bluish tint */
+}
 
 .delete-btn:hover {
     background-color: #b71f3a;
