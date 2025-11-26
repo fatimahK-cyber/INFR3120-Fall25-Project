@@ -1,18 +1,11 @@
+const mongoose = require("mongoose");
 
-// Import mongoose
-let mongoose = require('mongoose');
-
-// Define the structure for a book entry
-let WorkoutModel = mongoose.Schema({
-    "Name": String,
-    "Type": String,
-    "Duration": Number,
-    "Date": Date
-
-},
-{
-    collection: "workouts"
+const workoutSchema = new mongoose.Schema({
+  Name: { type: String, required: true },
+  Type: { type: String, required: true },
+  Duration: { type: Number, required: true }, // or String if you used that
+  Date: { type: Date, required: true },       // or String if you used that
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }
 });
 
-// Make the model available to use in other files
-module.exports = mongoose.model('Workout', WorkoutModel);
+module.exports = mongoose.model("Workout", workoutSchema);

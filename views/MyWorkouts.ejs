@@ -1,24 +1,11 @@
 <%- include('partials/header') %>
 
-
-<% const page = 'list'; %> <!-- Current page identifier -->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Workouts</title>
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
-
-  
+<% const page = 'list'; %>
 
 <main class="hero workouts-hero">
     <h2 class="workouts-heading-main">Your Workouts</h2>
 
-
-    <% if (workoutList.length === 0) { %>
+    <% if (!workoutList || workoutList.length === 0) { %>
         <!-- Message if no workouts exist -->
         <p class="description">
             You don't have any workouts yet.
@@ -40,23 +27,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% workoutList.forEach(w => { %>
-                        <tr>
-                            <td><%= w.name %></td>
-                            <td><%= w.type %></td>
-                            <td><%= w.duration %> min</td>
-                            <td><%= w.date %></td>
-                            <td class="workouts-actions">
-                                <!-- Edit and Delete buttons -->
-                                <a href="/workouts/<%= w.id %>/edit" class="action-btn edit-btn">Edit</a>
-                                <form action="/workouts/<%= w.id %>/delete" method="POST">
-                                    <button type="submit" class="action-btn delete-btn"
-                                            onclick="return confirm('Delete this workout?');">
+                        <% workoutList.forEach(function (w) { %>
+                            <tr>
+                                <!-- NOTE: field names match your Mongoose model:
+                                     "Name", "Type", "Duration", "Date" -->
+                                <td><%= w.Name %></td>
+                                <td><%= w.Type %></td>
+                                <td><%= w.Duration %> min</td>
+                                <td>
+                                    <% if (w.Date && w.Date.toDateString) { %>
+                                        <%= w.Date.toDateString() %>
+                                    <% } else { %>
+                                        <%= w.Date || '' %>
+                                    <% } %>
+                                </td>
+                                <td class="workouts-actions">
+                                    <!-- Routes match workouts.js: /edit/:id and /delete/:id -->
+                                    <a href="/workouts/edit/<%= w._id %>" class="action-btn edit-btn">
+                                        Edit
+                                    </a>
+                                    <a href="/workouts/delete/<%= w._id %>" 
+                                       class="action-btn delete-btn"
+                                       onclick="return confirm('Delete this workout?');">
                                         Delete
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
+                                    </a>
+                                </td>
+                            </tr>
                         <% }) %>
                     </tbody>
                 </table>
@@ -65,8 +61,5 @@
     <% } %>
 </main>
 
-
 <%- include('partials/footer') %>
 
-</body>
-</html>
