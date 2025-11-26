@@ -39,7 +39,7 @@ router.post("/signup", async (req, res) => {
         // your helper to save, or use new User(newUser).save()
         await saveNewUser(newUser);
 
-        // after signup, go to login page
+        // after signup, go to sign in page
         res.redirect("/signin");
     } catch (err) {
         console.error(err);
