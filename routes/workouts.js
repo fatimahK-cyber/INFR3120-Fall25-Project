@@ -18,7 +18,7 @@ router.get('/', requireSignIn, async (req, res, next) => {
     try {
         // ONLY get workouts for this user
         const workoutList = await Workout.find({ user: req.session.user._id });
-        res.render('MyWorkouts', { title: 'My Workouts', workoutList });
+        res.render('MyWorkouts', { title: 'My Workouts', workouts: workoutList });
     }
     catch (err) {
         console.error(err);
@@ -26,7 +26,7 @@ router.get('/', requireSignIn, async (req, res, next) => {
     }
 });
 
-/* GET add form - create operation */
+// GET the add form - create operation
 router.get('/add', requireSignIn, async (req, res, next) => {
     try {
         res.render('add', { title: 'Add workout' });
@@ -37,7 +37,7 @@ router.get('/add', requireSignIn, async (req, res, next) => {
     }
 });
 
-/* POST add form - create operation */
+/* post the data  - create operation*/
 router.post('/add', requireSignIn, async (req, res, next) => {
     try {
         let newWorkout = Workout({
@@ -48,16 +48,16 @@ router.post('/add', requireSignIn, async (req, res, next) => {
             user: req.session.user._id,
         });
 
-        await Workout.create(newWorkout);
-
-        // CHANGED: go back to list page
-        res.redirect('/workouts');
+        Workout.create(newWorkout).then(()=>{
+            res.redirect('/workouts');   //  <<< THIS IS THE WRONG ONE
+        });
     }
-    catch (err) {
+    catch(err) {
         console.error(err);
         next(err);
     }
-});
+})
+
 
 /* GET edit form - update operation */
 router.get('/edit/:id', requireSignIn, async (req, res, next) => {
