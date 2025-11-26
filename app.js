@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 let mongoose = require('mongoose');
 let DB = require('./config/db');
+const session = require("express-session");
 
 
 
@@ -30,6 +31,13 @@ app.use(express.urlencoded({ extended: true }));
 // SERVE STATIC FILES (CSS, images)
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(
+  session({
+    secret: "workit-secret",   // any string
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 // IMPORT SIGNUP ROUTES
 const signupRouter = require("./routes/signup");
