@@ -12,7 +12,8 @@ WorkIt is a simple fitness tracker web application built using   Node.js, Expres
  > Added main CSS styling and layout  
 
   Fatimah Kamal    
- > Built the Add Workout page  
+ > created a MongoDB database and connected the webpage to the Database
+ > Built the Add and Edit Workout page  
  > Created form fields (name, type, duration, date)  
  > Implemented POST /workouts (Create)  
  > Connected form back to My Workouts
