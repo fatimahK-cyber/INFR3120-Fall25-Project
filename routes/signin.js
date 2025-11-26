@@ -12,9 +12,14 @@ router.get("/signin", (req, res) => {
 router.post("/signin", async (req, res, next) => {
   const { username, password } = req.body;
 
+  // basic validation
+  if (!username || !password) {
+    return res.render("signin", { message: "Both fields are required." });
+  }
+
   try {
     // look up user in MongoDB
-    const user = await User.findOne({ username }).exec();
+    const user = await User.findOne({ username: username.trim() }).exec();
 
     // if no user or wrong password
     if (!user || user.password !== password) {
@@ -25,12 +30,14 @@ router.post("/signin", async (req, res, next) => {
     req.session.user = {
       _id: user._id,
       username: user.username,
+      email: user.email,
     };
 
     // go to dashboard or workouts
-    res.redirect("/dashboard");
+    return res.redirect("/workouts");   // or "/dashboard" if you prefer
   } catch (err) {
-    next(err);
+    console.error("Signin error:", err);
+    return res.render("signin", { message: "Something went wrong." });
   }
 });
 

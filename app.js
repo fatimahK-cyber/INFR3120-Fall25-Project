@@ -19,6 +19,8 @@ mongoDB.once('open', () => {
     console.log('Connected to MongoDB');
 });
 
+
+
 // CONFIGURE VIEW ENGINE (EJS)
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -43,9 +45,10 @@ app.use(
 const signupRouter = require("./routes/signup");
 app.use("/",signupRouter);
 
-// IMPORT SIGNIN ROUTES
+//signin routes 
 const signinRouter = require("./routes/signin");
-app.use("/",signinRouter);
+app.use("/", signinRouter);
+
 
 
 // IMPORT WORKOUT ROUTES
