@@ -2,48 +2,52 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/users.models");
 
-// GET /signup
+// GET /signup  → show form
 router.get("/signup", (req, res) => {
-    // Pass error so EJS never crashes
     res.render("signup", { error: "" });
 });
 
-// POST /signup
+// POST /signup  → handle form submit
 router.post("/signup", async (req, res) => {
     const { username, email, password, confirmPassword } = req.body;
 
-    // basic required fields
+    // 1) basic required fields
     if (!username || !email || !password || !confirmPassword) {
         return res.render("signup", { error: "All fields are required." });
     }
 
-    // check passwords match
+    // 2) password match
     if (password !== confirmPassword) {
         return res.render("signup", { error: "Passwords do not match." });
     }
 
     try {
-        // your own helper, or adjust to use User.findOne if needed
-        const emailTaken = await checkEmailExists(email);
+        // 3) check if username OR email already exists
+        const existingUser = await User.findOne({
+            $or: [
+                { username: username.trim() },
+                { email: email.toLowerCase().trim() }
+            ],
+        });
 
-        if (emailTaken) {
-            return res.render("signup", { error: "Email already in use." });
+        if (existingUser) {
+            return res.render("signup", { error: "Username or email already in use." });
         }
 
-        const newUser = {
-            username,
-            email,
-            password,
-        };
+        // 4) create and save new user
+        const newUser = new User({
+            username: username.trim(),
+            email: email.toLowerCase().trim(),
+            password, // plain text is okay for this assignment
+        });
 
-        // your helper to save, or use new User(newUser).save()
-        await saveNewUser(newUser);
+        await newUser.save();
 
-        // after signup, go to login page
-        res.redirect("/signin");
+        // 5) signup success → go to Sign In page
+        return res.redirect("/signin");
     } catch (err) {
         console.error(err);
-        res.render("signup", { error: "Something went wrong." });
+        return res.render("signup", { error: "Something went wrong." });
     }
 });
 
