@@ -1,3 +1,4 @@
+// page for sign out 
 const express = require("express");
 const router = express.Router();
 

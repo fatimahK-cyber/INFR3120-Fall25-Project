@@ -1,3 +1,4 @@
+// making sure it asks for sign in 
 function requireSignIn(req, res, next) {
     if (!req.session || !req.session.user) {
         return res.redirect("/signin");
@@ -11,12 +12,12 @@ let router = express.Router();
 let mongoose = require('mongoose');
 let Workout = require('../models/workouts.models.js');
 
-// CRUD Operations
 
-/* READ - list all workouts for this user */
+
+/* read - list all workouts for this user */
 router.get('/', requireSignIn, async (req, res, next) => {
     try {
-        // ONLY get workouts for this user
+        // only get workouts for this user
         const workoutList = await Workout.find({ user: req.session.user._id });
         res.render("MyWorkouts", {
             title: "My Workouts",
@@ -31,7 +32,7 @@ router.get('/', requireSignIn, async (req, res, next) => {
     }
 });
 
-// GET the add form - create operation
+// GET the add form  
 router.get('/add', requireSignIn, async (req, res, next) => {
     try {
         res.render("add", { title: "Add Workout", session: req.session });
@@ -42,7 +43,7 @@ router.get('/add', requireSignIn, async (req, res, next) => {
     }
 });
 
-/* post the data  - create operation*/
+//post the data 
 router.post('/add', requireSignIn, async (req, res, next) => {
     try {
         let newWorkout = Workout({
@@ -64,7 +65,7 @@ router.post('/add', requireSignIn, async (req, res, next) => {
 })
 
 
-/* GET edit form - update operation */
+// GET edit form 
 router.get('/edit/:id', requireSignIn, async (req, res, next) => {
     try {
         const id = req.params.id;
@@ -81,7 +82,7 @@ router.get('/edit/:id', requireSignIn, async (req, res, next) => {
     }
 });
 
-/* POST edit form - update operation */
+// POST edit form
 router.post('/edit/:id', requireSignIn, async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -105,7 +106,7 @@ router.post('/edit/:id', requireSignIn, async (req, res, next) => {
 });
 
 
-/* DELETE workout - delete operation */
+// DELETE workout 
 router.get('/delete/:id', requireSignIn, async (req, res, next) => {
     try {
         let id = req.params.id;
