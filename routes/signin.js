@@ -12,6 +12,14 @@ router.get("/signin", (req, res) => {
 router.post("/signin", async (req, res, next) => {
   const { username, password } = req.body;
 
+  // LOG OUT ROUTE
+router.get("/signout", (req, res) => {
+    req.session.destroy(() => {
+        res.redirect("/signin");
+    });
+});
+
+
   // basic validation
   if (!username || !password) {
     return res.render("signin", { message: "Both fields are required." });
@@ -40,5 +48,11 @@ router.post("/signin", async (req, res, next) => {
     return res.render("signin", { message: "Something went wrong." });
   }
 });
-
+//Signout route
+router.get("/signout", (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("/signin");
+  });
+});
+ 
 module.exports = router;
