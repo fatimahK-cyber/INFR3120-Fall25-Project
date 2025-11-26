@@ -18,7 +18,7 @@
     <h2 class="workouts-heading-main">Your Workouts</h2>
 
 
-    <% if (workouts.length === 0) { %>
+    <% if (workoutList.length === 0) { %>
         <!-- Message if no workouts exist -->
         <p class="description">
             You don't have any workouts yet.
@@ -40,7 +40,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% workouts.forEach(w => { %>
+                        <% workoutList.forEach(w => { %>
                         <tr>
                             <td><%= w.name %></td>
                             <td><%= w.type %></td>
