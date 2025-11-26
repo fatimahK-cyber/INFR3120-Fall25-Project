@@ -18,7 +18,12 @@ router.get('/', requireSignIn, async (req, res, next) => {
     try {
         // ONLY get workouts for this user
         const workoutList = await Workout.find({ user: req.session.user._id });
-        res.render('MyWorkouts', { title: 'My Workouts', workouts: workoutList });
+        res.render("MyWorkouts", {
+            title: "My Workouts",
+            workouts: workoutList,
+            session: req.session
+        });
+
     }
     catch (err) {
         console.error(err);
@@ -29,7 +34,7 @@ router.get('/', requireSignIn, async (req, res, next) => {
 // GET the add form - create operation
 router.get('/add', requireSignIn, async (req, res, next) => {
     try {
-        res.render('add', { title: 'Add workout' });
+        res.render("add", { title: "Add Workout", session: req.session });
     }
     catch (err) {
         console.error(err);

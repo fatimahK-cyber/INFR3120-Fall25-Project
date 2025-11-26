@@ -18,7 +18,7 @@ router.post("/signup", async (req, res) => {
 
     // 2) password match
     if (password !== confirmPassword) {
-        return res.render("signup", { error: "Passwords do not match." });
+        return res.render("signup", { error: "Passwords do not match." ,session: req.session });
     }
 
     try {

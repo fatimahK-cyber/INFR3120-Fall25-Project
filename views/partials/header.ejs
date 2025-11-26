@@ -19,9 +19,21 @@
         <h1 class="site-name">Workit</h1>
     </div>
 
+    <nav class="nav ">
+            <% if (session && session.user) { %>
+            <!-- logged in -->
+            <a href="/workouts" class="nav-link">My Workouts</a>
+            <a href="/workouts/add" class="nav-link">Add Workout</a>
+            <span class="nav-user">Hi, <%= session.user.username %></span>
+            <a href="/signout" class="nav-link">Sign Out</a>
+        <% } else { %>
+            <!-- logged out -->
+            <a href="/signin" class="nav-link">Sign In</a>
+            <a href="/signup" class="nav-link">Sign Up</a>
+        <% } %>
+    </nav>
 
-
-
+<!--
     <nav class="nav ">
         <a href="/" class="nav-link">Home</a>
         <a href="/signup" class="nav-link">Sign Up</a>
@@ -29,7 +41,7 @@
         <a href="/workouts" class="nav-link">My Workouts</a>
     </nav>
     <hr>
-
+-->
     
 </header>
 

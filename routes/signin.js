@@ -22,7 +22,8 @@ router.get("/signout", (req, res) => {
 
   // basic validation
   if (!username || !password) {
-    return res.render("signin", { message: "Both fields are required." });
+    return res.render("signin", { message: "Both fields are required.", session: req.session });
+
   }
 
   try {

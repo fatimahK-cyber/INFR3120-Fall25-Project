@@ -33,18 +33,23 @@ app.use(express.urlencoded({ extended: true }));
 // SERVE STATIC FILES (CSS, images)
 app.use(express.static(path.join(__dirname, "public")));
 
+
 app.use(
   session({
-    secret: "workit-secret",   // any string
+    secret: "workit-secret",
     resave: false,
     saveUninitialized: false,
   })
 );
 
+// add this
 app.use((req, res, next) => {
-  res.locals.session = req.session;  // make session available in EJS
+  res.locals.session = req.session;  // EJS can use `session`
   next();
 });
+
+
+
 
 
 // IMPORT SIGNUP ROUTES
@@ -54,6 +59,10 @@ app.use("/",signupRouter);
 //signin routes 
 const signinRouter = require("./routes/signin");
 app.use("/", signinRouter);
+
+//signout route
+const signoutRouter = require("./routes/signout");
+app.use("/", signoutRouter);
 
 
 
@@ -65,7 +74,8 @@ const workoutsRouter = require("./routes/workouts");
 
 // HOME PAGE ROUTE
 app.get("/", (req, res) => {
-    res.render("dashboard"); 
+    res.render("dashboard", { session: req.session });
+
 });
 
 
