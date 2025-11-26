@@ -38,15 +38,15 @@ router.post("/signup", async (req, res) => {
         const newUser = new User({
             username: username.trim(),
             email: email.toLowerCase().trim(),
-            password, // plain text is okay for this assignment
+            password, // plain text for this assignment
         });
 
         await newUser.save();
 
-        // after signup, go to login page
-        res.redirect("/signin");
+        // 5) signup success → go to Sign In page
+        return res.redirect("/signin");
     } catch (err) {
-        console.error(err);
+        console.error("Signup error:", err);
         return res.render("signup", { error: "Something went wrong." });
     }
 });
