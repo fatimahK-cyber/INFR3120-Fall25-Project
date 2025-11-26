@@ -41,6 +41,12 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  res.locals.session = req.session;  // make session available in EJS
+  next();
+});
+
+
 // IMPORT SIGNUP ROUTES
 const signupRouter = require("./routes/signup");
 app.use("/",signupRouter);
