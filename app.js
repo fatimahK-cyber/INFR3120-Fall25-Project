@@ -66,14 +66,6 @@ app.use((req, res, next) => {
 
 app.use("/",passwordRoutes);
  
-
-// ROUTES
-const signupRouter = require("./routes/signup");
-const signinRouter = require("./routes/signin");
-const signoutRouter = require("./routes/signout");
-const indexRouter = require("./routes/index");
-const workoutsRouter = require("./routes/workouts");
-
 // ------------------- OAUTH ROUTES -------------------
 // Google
 app.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
