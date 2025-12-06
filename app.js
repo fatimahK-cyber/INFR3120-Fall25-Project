@@ -3,19 +3,16 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const session = require("express-session");
-<<<<<<< HEAD
 const passwordRoutes = require("./routes/password"); // adjust path
 
 
 // LOAD ENV VARIABLES
-=======
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const GitHubStrategy = require("passport-github2").Strategy;
 const MicrosoftStrategy = require("passport-microsoft").Strategy;
 
 // ------------------- ENV & MODELS -------------------
->>>>>>> 5b0261542fcea592f0f6b7a80ceedc11ee55ee86
 require("dotenv").config();
 const DB = require("./config/db");
 const User = require("./models/users.models");
