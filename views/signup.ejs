@@ -1,92 +1,81 @@
 <%- include('partials/header') %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Sign Up - WorkIt</title>
-</head>
-<body>
 
-    <h1>Create Your Account</h1>
+<main class="hero">
+  <section class="form-card">
+    <h2 class="page-title">Create Your Account</h2>
+    <h3 class="page-subtitle">Please Sign Up</h3>
+
     <% if (error) { %>
-        <p style="color: red;"><%= error %></p>
+      <p class="auth-message"><%= error %></p>
     <% } %>
 
+    <form method="post" autocomplete="off" class="auth-form">
+      <div class="form-row">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          class="form-control auth-input"
+          name="username"
+          placeholder="Enter username"
+          id="username"
+          required
+          autofocus
+        >
+      </div>
 
+      <div class="form-row">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          class="form-control auth-input"
+          name="email"
+          placeholder="Enter email"
+          id="email"
+          required
+        >
+      </div>
 
-    <div class="row">
-        <div class="offset-md-4 col-md-4">
-            <h1>Please Sign Up</h1>
+      <div class="form-row">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control auth-input"
+          name="password"
+          placeholder="Enter password"
+          id="password"
+          required
+        >
+      </div>
 
-            <form method="post" autocomplete="off">
-                <fieldset class="form-group">
-                    <label for="username"></label>
-                    <input 
-                        type="text" 
-                        class="form-control"
-                        name="username"
-                        placeholder="Enter username"
-                        id="username"
-                        required 
-                        autofocus
-                    >
-                </fieldset>
+      <div class="form-row">
+        <label for="confirmPassword">Confirm password</label>
+        <input
+          type="password"
+          class="form-control auth-input"
+          name="confirmPassword"
+          placeholder="Confirm password"
+          id="confirmPassword"
+          required
+        >
+      </div>
 
-                <fieldset class="form-group">
-                    <label for="email"></label>
-                    <input 
-                        type="email" 
-                        class="form-control"
-                        name="email"
-                        placeholder="Enter email"
-                        id="email"
-                        required 
-                    >
-                </fieldset>
+      <div class="form-actions">
+        <button type="submit" class="btn hero-btn">Sign Up</button>
+        <button
+          type="button"
+          class="btn btn-warning"
+          onclick="window.location='/'"
+        >
+          Cancel
+        </button>
+      </div>
 
-                <fieldset class="form-group">
-                    <label for="password"></label>
-                    <input 
-                        type="password" 
-                        class="form-control"
-                        name="password"
-                        placeholder="Enter password"
-                        id="password"
-                        required
-                    >
-                </fieldset>
+      <p class="auth-helper">
+        Already have an account?
+        <a href="/signin">Sign In</a>
+      </p>
+    </form>
+  </section>
+</main>
 
-                <fieldset class="form-group">
-                    <label for="confirmPassword"></label>
-                    <input 
-                        type="password" 
-                        class="form-control"
-                        name="confirmPassword"
-                        placeholder="Confirm password"
-                        id="confirmPassword"
-                        required
-                    >
-                </fieldset>
-
-                <fieldset class="form-group text-right">
-                    <input 
-                        type="submit" 
-                        class="btn btn-success" 
-                        value="Sign Up"
-                    >
-                    <input 
-                        type="button" 
-                        class="btn btn-warning" 
-                        value="Cancel"
-                        onclick="window.location='/'"
-                    >
-                </fieldset>
-            </form>
-
-    <p>Already have an account? <a href="/signin">Sign In</a></p>
-
-    
-    <%- include('partials/footer') %>
-
-</body>
-</html>
+<%- include('partials/footer') %>
