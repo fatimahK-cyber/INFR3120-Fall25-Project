@@ -1,65 +1,70 @@
+<!--adding angular-->
 <%- include('partials/header') %>
 
-<% const page = 'list'; %>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 
-<main class="hero workouts-hero">
+<main class="hero" ng-app="workoutApp" ng-controller="WorkoutController">
+
     <h2 class="workouts-heading-main">Your Workouts</h2>
 
     <% if (!workouts || workouts.length === 0) { %>
-        <!-- Message if no workouts exist -->
         <p class="description">
             You don't have any workouts yet.
             <a href="/workouts/add">Add your first workout</a> to get started.
         </p>
     <% } else { %>
-        <!-- Display workouts table -->
-        <div class="workouts-wrapper">
-            <div class="workouts-card">
-                <h3 class="workouts-title">Workout Summary</h3>
-                <table class="workouts-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Type</th>
-                            <th>Duration</th>
-                            <th>Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% workouts.forEach(function (w) { %>
-                            <tr>
-                                <!-- NOTE: field names match your Mongoose model:
-                                     "Name", "Type", "Duration", "Date" -->
-                                <td><%= w.Name %></td>
-                                <td><%= w.Type %></td>
-                                <td><%= w.Duration %> min</td>
-                                <td>
-                                    <% if (w.Date && w.Date.toDateString) { %>
-                                        <%= w.Date.toDateString() %>
-                                    <% } else { %>
-                                        <%= w.Date || '' %>
-                                    <% } %>
-                                </td>
-                                <td class="workouts-actions">
-                                    <!-- Routes match workouts.js: /edit/:id and /delete/:id -->
-                                    <a href="/workouts/edit/<%= w._id %>" class="action-btn edit-btn">
-                                        Edit
-                                    </a>
-                                    <a href="/workouts/delete/<%= w._id %>" 
-                                       class="action-btn delete-btn"
-                                       onclick="return confirm('Delete this workout?');">
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
-                        <% }) %>
-                    </tbody>
-                </table>
-            </div>
+
+    <div class="workouts-wrapper">
+        <div class="workouts-card">
+            <h3 class="workouts-title">Workout Summary</h3>
+
+            <!-- Search Bar -->
+            <input 
+                type="text" 
+                ng-model="search" 
+                placeholder="Search workouts..." 
+                class="search-input"
+            >
+
+            <table class="workouts-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Duration</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr ng-repeat="item in workouts | filter:search">
+                        <td>{{ item.Name }}</td>
+                        <td>{{ item.Type }}</td>
+                        <td>{{ item.Duration }} min</td>
+                        <td>{{ item.Date | date:'EEE MMM dd yyyy' }}</td>
+                        <td class="workouts-actions">
+                            <a href="/workouts/edit/{{ item._id }}" class="action-btn edit-btn">Edit</a>
+                            <a href="/workouts/delete/{{ item._id }}" class="action-btn delete-btn" onclick="return confirm('Delete this workout?');">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
         </div>
+    </div>
+
     <% } %>
+
 </main>
 
-<%- include('partials/footer') %>
+<script>
+var app = angular.module("workoutApp", []);
 
+app.controller("WorkoutController", function($scope) {
+    $scope.workouts = <%- JSON.stringify(workouts) %>;
+    $scope.search = "";
+});
+</script>
+
+<%- include('partials/footer') %>

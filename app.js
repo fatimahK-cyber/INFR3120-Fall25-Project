@@ -3,6 +3,10 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const session = require("express-session");
+const passwordRoutes = require("./routes/password"); // adjust path
+
+
+// LOAD ENV VARIABLES
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const GitHubStrategy = require("passport-github2").Strategy;
@@ -66,6 +70,21 @@ app.use((req, res, next) => {
 
 app.use("/",passwordRoutes);
  
+
+// ROUTES
+/*const signupRouter = require("./routes/signup");
+const signinRouter = require("./routes/signin");
+const signoutRouter = require("./routes/signout");
+const indexRouter = require("./routes/index");
+const workoutsRouter = require("./routes/workouts");*/
+
+// USE ROUTES
+app.use("/", signupRouter);
+app.use("/", signinRouter);
+app.use("/", signoutRouter);
+app.use("/dashboard", indexRouter);
+app.use("/workouts", workoutsRouter);
+app.use(profileRoutes); // profile routes (they use /profile inside)
 // ------------------- OAUTH ROUTES -------------------
 // Google
 app.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));

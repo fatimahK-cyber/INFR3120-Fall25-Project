@@ -2,6 +2,7 @@
     <% if (session && session.user) { %>
         <a href="/" class="nav-link">Home</a>
         <a href="/workouts" class="nav-link">My Workouts</a>
+        <!--<a href="/password/change" class="nav-link">Change Password</a>-->
         <a href="/profile" class="nav-link">Profile</a> 
         <a href="/signout" class="nav-link">Sign Out</a>
     <% } else { %>
