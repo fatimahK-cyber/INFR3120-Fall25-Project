@@ -3,10 +3,6 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const session = require("express-session");
-const passwordRoutes = require("./routes/password"); // adjust path
-
-
-// LOAD ENV VARIABLES
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const GitHubStrategy = require("passport-github2").Strategy;
@@ -23,7 +19,7 @@ const signinRouter = require("./routes/signin");
 const signoutRouter = require("./routes/signout");
 const indexRouter = require("./routes/index");
 const workoutsRouter = require("./routes/workouts");
-const passwordRoutes = require("./routes/password");
+const passwordRoutes = require("./routes/password"); // <--- only declared once
 const profileRoutes = require("./routes/profile");
 
 // ------------------- APP SETUP -------------------
@@ -54,7 +50,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Make session info available in all EJS templates
+// Make session info available in EJS
 app.use((req, res, next) => {
   if (req.user) {
     req.session.user = {
@@ -94,7 +90,7 @@ passport.use(
             username: profile.id,
             displayName: profile.displayName,
             email: profile.emails[0].value,
-            password: undefined, // OAuth users don’t need a password
+            password: undefined,
           });
           await user.save();
         }
@@ -196,7 +192,7 @@ app.use("/", indexRouter);
 app.use("/workouts", workoutsRouter);
 app.use("/", signinRouter);
 app.use("/", signupRouter);
-app.use("/profile", profileRoutes);// profile routes (inside they handle /profile)
+app.use("/profile", profileRoutes); // profile routes
 
 // ------------------- DASHBOARD ROUTE -------------------
 app.get("/dashboard", (req, res) => {
