@@ -1,48 +1,49 @@
 <%- include('partials/header') %>
 
 <main class="hero">
-    <h2>My Profile</h2>
+  <section class="profile-card">
+    <h2 class="page-title">My Profile</h2>
+
     <%
-    const user = session && session.user ? session.user : null;
-    const hasCustomImage = user && user.profileImage && user.profileImage !== "/uploads/default.png";
+      const user = session && session.user ? session.user : null;
+      const hasCustomImage =
+        user && user.profileImage && user.profileImage !== "/uploads/default.png";
     %>
-    <div style="margin-bottom: 20px;">
-        <img
+
+    <div class="profile-picture-wrapper">
+      <img
         src="<%= hasCustomImage ? user.profileImage : '/uploads/default.png' %>"
         alt="Profile picture"
-        style="width:150px;height:150px;border-radius:50%;object-fit:cover;border:3px solid #b47ac2;"
-        >
+        class="profile-picture-img"
+      >
     </div>
+
     <% if (!hasCustomImage) { %>
-        <!-- STATE 1: no custom picture yet -->
-         <form action="/profile/upload" method="POST" enctype="multipart/form-data" class="auth-form">
-            <label for="profileImage">Upload New Profile Picture</label>
-            <input type="file" name="profileImage" id="profileImage" accept="image/*" required>
-            <button type="submit" class="btn hero-btn">Upload Picture</button>
-        </form>
-        <% } else { %>
-            <!-- STATE 2: user ALREADY has a picture -->
-             <form action="/profile/delete" method="POST">
-                <button class="btn btn-danger" style="margin-top: 10px;">
-                    🗑️ Delete Picture
-                </button>
-            </form>
-            <% } %>
-
-
-    <% if (session && session.user) { %>
-        <div style="margin-bottom: 20px;">
-            <img
-                src="<%= session.user.profileImage || '/uploads/default.png' %>"
-                alt="Profile picture"
-                style="width:150px;height:150px;border-radius:50%;object-fit:cover;border:3px solid #b47ac2;"
-            >
+      <!-- No picture yet: show upload -->
+      <form action="/profile/upload" method="POST"
+            enctype="multipart/form-data" class="auth-form profile-form">
+        <div class="form-row">
+          <label for="profileImage">Upload New Profile Picture</label>
+          <input type="file" name="profileImage" id="profileImage" accept="image/*" required>
         </div>
 
+        <div class="form-actions">
+          <button type="submit" class="btn hero-btn">
+            Upload Picture
+          </button>
+        </div>
+      </form>
     <% } else { %>
-        <p>You must be signed in to view this page.</p>
+      <!-- Picture exists: show delete -->
+      <form action="/profile/delete" method="POST" class="profile-form">
+        <div class="form-actions">
+          <button class="btn btn-danger">
+            🗑️ Delete Picture
+          </button>
+        </div>
+      </form>
     <% } %>
+  </section>
 </main>
 
 <%- include('partials/footer') %>
-

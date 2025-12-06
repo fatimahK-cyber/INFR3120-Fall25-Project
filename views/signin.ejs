@@ -1,61 +1,56 @@
 <%- include('partials/header') %>
 
+<main class="hero">
+  <% if (message && message.length > 0) { %>
+    <p class="auth-message"><%= message %></p>
+  <% } %>
 
-<main class="container">
-    <% if (message && message.length > 0) { %>
-        <div class="alert alert-danger">
-            <%= message %>
-        </div>
-    <% } %>
+  <section class="form-card">
+    <h2 class="page-title">Please Sign In</h2>
 
-    <div class="row">
-        <div class="offset-md-4 col-md-4">
-            <h1>Please Sign In</h1>
+    <form method="post" autocomplete="off" class="auth-form">
+      <div class="form-row">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          class="form-control auth-input"
+          name="username"
+          placeholder="Enter username"
+          id="username"
+          required
+          autofocus
+        >
+      </div>
 
-            <form method="post" autocomplete="off">
-                <fieldset class="form-group">
-                    <label for="username"></label>
-                    <input 
-                        type="text" 
-                        class="form-control"
-                        name="username"
-                        placeholder="Enter username"
-                        id="username"
-                        required 
-                        autofocus
-                    >
-                </fieldset>
+      <div class="form-row">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control auth-input"
+          name="password"
+          placeholder="Enter password"
+          id="password"
+          required
+        >
+      </div>
 
-                <fieldset class="form-group">
-                    <label for="password"></label>
-                    <input 
-                        type="password" 
-                        class="form-control"
-                        name="password"
-                        placeholder="Enter password"
-                        id="password"
-                        required
-                    >
-                    or <a href="/signup">Register here</a>
-                </fieldset>
+      <p class="auth-helper">
+        Don’t have an account?
+        <a href="/signup">Register here</a>
+      </p>
 
-                <fieldset class="form-group text-right">
-                    <input 
-                        type="submit" 
-                        class="btn btn-success" 
-                        value="Sign In"
-                    >
-                    <input 
-                        type="button" 
-                        class="btn btn-warning" 
-                        value="Cancel"
-                        onclick="window.location='/'"
-                    >
-                </fieldset>
-            </form>
-
-        </div>
-    </div>
-    <%- include('partials/footer') %>
-
+      <div class="form-actions">
+        <button type="submit" class="btn hero-btn">Sign In</button>
+        <button
+          type="button"
+          class="btn btn-warning"
+          onclick="window.location='/'"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </section>
 </main>
+
+<%- include('partials/footer') %>
