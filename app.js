@@ -64,11 +64,11 @@ app.use("/",passwordRoutes);
  
 
 // ROUTES
-const signupRouter = require("./routes/signup");
+/*const signupRouter = require("./routes/signup");
 const signinRouter = require("./routes/signin");
 const signoutRouter = require("./routes/signout");
 const indexRouter = require("./routes/index");
-const workoutsRouter = require("./routes/workouts");
+const workoutsRouter = require("./routes/workouts");*/
 
 // USE ROUTES
 app.use("/", signupRouter);
