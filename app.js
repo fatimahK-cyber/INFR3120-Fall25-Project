@@ -3,6 +3,8 @@ const express = require("express");
 const path = require("path");
 const mongoose = require('mongoose');
 const session = require("express-session");
+const passwordRoutes = require("./routes/password"); // adjust path
+
 
 // LOAD ENV VARIABLES
 require('dotenv').config();
@@ -46,6 +48,9 @@ app.use((req, res, next) => {
   res.locals.session = req.session;
   next();
 });
+
+app.use("/",passwordRoutes);
+ 
 
 // ROUTES
 const signupRouter = require("./routes/signup");
