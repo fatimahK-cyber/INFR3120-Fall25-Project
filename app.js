@@ -24,7 +24,7 @@ const signoutRouter = require("./routes/signout");
 const indexRouter = require("./routes/index");
 const workoutsRouter = require("./routes/workouts");
 const profileRoutes = require("./routes/profile");
-const passwordRoutes = require("./routes/password"); // adjust path if needed
+
 
 // ------------------- APP SETUP -------------------
 const app = express();
