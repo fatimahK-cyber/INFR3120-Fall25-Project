@@ -12,18 +12,29 @@ function requireSignIn(req, res, next) {
   next();
 }
 
+/**
+ * NOTE:
+ * This router is mounted at /profile in app.js:
+ *   app.use("/profile", profileRoutes);
+ *
+ * So the paths below are:
+ *   GET  /profile          -> show profile page
+ *   POST /profile/upload   -> upload new picture
+ *   POST /profile/delete   -> reset to default picture
+ */
+
 // ========================
-// SHOW PROFILE PAGE
+// SHOW PROFILE PAGE  (GET /profile)
 // ========================
-router.get("/profile", requireSignIn, (req, res) => {
-  res.render("profile");
+router.get("/", requireSignIn, (req, res) => {
+  res.render("profile", { session: req.session });
 });
 
 // ========================
-// UPLOAD PROFILE IMAGE
+// UPLOAD PROFILE IMAGE  (POST /profile/upload)
 // ========================
 router.post(
-  "/profile/upload",
+  "/upload",
   requireSignIn,
   upload.single("profileImage"),
   async (req, res) => {
@@ -32,9 +43,10 @@ router.post(
     const imagePath = "/uploads/" + req.file.filename;
 
     await User.findByIdAndUpdate(req.session.user._id, {
-      profileImage: imagePath
+      profileImage: imagePath,
     });
 
+    // keep session in sync so navbar + pages update immediately
     req.session.user.profileImage = imagePath;
 
     res.redirect("/profile");
@@ -42,13 +54,13 @@ router.post(
 );
 
 // ========================
-// DELETE PROFILE IMAGE  ⬅️ PUT THE CODE HERE
+// DELETE PROFILE IMAGE  (POST /profile/delete)
 // ========================
-router.post("/profile/delete", requireSignIn, async (req, res) => {
+router.post("/delete", requireSignIn, async (req, res) => {
   const defaultImage = "/uploads/default.png";
 
   await User.findByIdAndUpdate(req.session.user._id, {
-    profileImage: defaultImage
+    profileImage: defaultImage,
   });
 
   req.session.user.profileImage = defaultImage;
@@ -56,5 +68,4 @@ router.post("/profile/delete", requireSignIn, async (req, res) => {
   res.redirect("/profile");
 });
 
-// ========================
 module.exports = router;

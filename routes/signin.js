@@ -26,7 +26,8 @@ router.post("/signin", async (req, res) => {
       _id: user._id,
       username: user.username,
       email: user.email,
-      displayName: user.displayName || user.username
+      displayName: user.displayName || user.username,
+      profileImage: user.profileImage || "/uploads/default.png"
     };
 
     return res.redirect("/workouts");
