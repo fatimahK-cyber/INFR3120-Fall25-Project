@@ -3,10 +3,6 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const session = require("express-session");
-const passwordRoutes = require("./routes/password"); // adjust path
-
-
-// LOAD ENV VARIABLES
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const GitHubStrategy = require("passport-github2").Strategy;
@@ -23,8 +19,8 @@ const signinRouter = require("./routes/signin");
 const signoutRouter = require("./routes/signout");
 const indexRouter = require("./routes/index");
 const workoutsRouter = require("./routes/workouts");
+const passwordRoutes = require("./routes/password");
 const profileRoutes = require("./routes/profile");
-
 
 // ------------------- APP SETUP -------------------
 const app = express();
@@ -54,7 +50,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Make session info available in EJS
+// Make session info available in all EJS templates
 app.use((req, res, next) => {
   if (req.user) {
     req.session.user = {
@@ -68,15 +64,102 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/",passwordRoutes);
- 
+passport.serializeUser((user, done) => done(null, user.id));
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err, null);
+  }
+});
 
-// ROUTES
-/*const signupRouter = require("./routes/signup");
-const signinRouter = require("./routes/signin");
-const signoutRouter = require("./routes/signout");
-const indexRouter = require("./routes/index");
-const workoutsRouter = require("./routes/workouts");*/
+// ------------------- GOOGLE STRATEGY -------------------
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: "http://localhost:3000/auth/google/callback",
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        let user = await User.findOne({ email: profile.emails[0].value });
+        if (!user) {
+          user = new User({
+            username: profile.id,
+            displayName: profile.displayName,
+            email: profile.emails[0].value,
+            password: undefined, // OAuth users don’t need a password
+          });
+          await user.save();
+        }
+        done(null, user);
+      } catch (err) {
+        done(err, null);
+      }
+    }
+  )
+);
+
+// ------------------- GITHUB STRATEGY -------------------
+passport.use(
+  new GitHubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: "http://localhost:3000/auth/github/callback",
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        let user = await User.findOne({ githubId: profile.id });
+        if (!user) {
+          user = new User({
+            username: profile.username,
+            displayName: profile.displayName || profile.username,
+            githubId: profile.id,
+            email: profile.emails?.[0]?.value || "",
+            password: undefined,
+          });
+          await user.save();
+        }
+        done(null, user);
+      } catch (err) {
+        done(err, null);
+      }
+    }
+  )
+);
+
+// ------------------- MICROSOFT STRATEGY -------------------
+passport.use(
+  new MicrosoftStrategy(
+    {
+      clientID: process.env.MICROSOFT_CLIENT_ID,
+      clientSecret: process.env.MICROSOFT_CLIENT_SECRET,
+      callbackURL: process.env.MICROSOFT_CALLBACK_URL,
+      scope: ["user.read", "openid", "profile", "email"],
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        const email = profile.emails?.[0]?.value || `${profile.id}@microsoft.com`;
+        let user = await User.findOne({ email });
+        if (!user) {
+          user = new User({
+            username: profile.id,
+            displayName: profile.displayName || profile.id,
+            email: email,
+            password: undefined,
+          });
+          await user.save();
+        }
+        done(null, user);
+      } catch (err) {
+        done(err, null);
+      }
+    }
+  )
+);
 
 // ------------------- OAUTH ROUTES -------------------
 // Google
@@ -109,7 +192,7 @@ app.use("/", indexRouter);
 app.use("/workouts", workoutsRouter);
 app.use("/", signinRouter);
 app.use("/", signupRouter);
-app.use(profileRoutes);
+app.use(profileRoutes); // profile routes (inside they handle /profile)
 
 // ------------------- DASHBOARD ROUTE -------------------
 app.get("/dashboard", (req, res) => {
