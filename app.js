@@ -85,6 +85,10 @@ const signupRouter = require("./routes/signup");
 
 app.use("/", indexRouter);
 app.use("/workouts", workoutsRouter);
+app.use("/signin", signinRouter);
+app.use("/signup", signupRouter);
+app.use("/signout", signoutRouter);
+app.use("/password", passwordRoutes);
 
 // HOME PAGE ROUTE
 app.get("/", (req, res) => {
