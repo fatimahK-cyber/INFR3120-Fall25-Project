@@ -20,6 +20,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,   // plain text for this assignment
   },
+
+  profileImage: {
+    type: String,
+    default: "/uploads/default.png"   // you can create a default picture later
+  }
 });
+
 
 module.exports = mongoose.model("User", userSchema);
