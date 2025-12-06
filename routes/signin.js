@@ -8,24 +8,20 @@ router.get("/signin", (req, res) => {
 });
 
 // POST /signin – handle sign in submit
-router.post("/signin", async (req, res, next) => {
+router.post("/signin", async (req, res) => {
   const { username, password } = req.body;
 
-  // basic validation
   if (!username || !password) {
     return res.render("signin", { message: "Both fields are required.", session: req.session });
   }
 
   try {
-    // look up user in MongoDB
-    const user = await User.findOne({ username: username.trim() }).exec();
+    const user = await User.findOne({ username: username.trim() });
 
-    // if no user or wrong password
     if (!user || user.password !== password) {
       return res.render("signin", { message: "Invalid username or password.", session: req.session });
     }
 
-    // success → store user info in session
     req.session.user = {
       _id: user._id,
       username: user.username,
@@ -33,10 +29,9 @@ router.post("/signin", async (req, res, next) => {
       displayName: user.displayName || user.username
     };
 
-    // go to dashboard or workouts
     return res.redirect("/workouts");
-  } catch (err) {
-    console.error("Signin error:", err);
+  } catch (error) {
+    console.log(error);
     return res.render("signin", { message: "Something went wrong.", session: req.session });
   }
 });
