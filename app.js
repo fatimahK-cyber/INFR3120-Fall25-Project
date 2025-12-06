@@ -192,7 +192,7 @@ app.use("/", indexRouter);
 app.use("/workouts", workoutsRouter);
 app.use("/", signinRouter);
 app.use("/", signupRouter);
-app.use(profileRoutes); // profile routes (inside they handle /profile)
+app.use("/profile", profileRoutes);// profile routes (inside they handle /profile)
 
 // ------------------- DASHBOARD ROUTE -------------------
 app.get("/dashboard", (req, res) => {

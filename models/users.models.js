@@ -10,32 +10,34 @@ const userSchema = new mongoose.Schema({
 
   email: {
     type: String,
-    required: false,    // optional for OAuth users
+    required: false,   // optional for OAuth users
     unique: true,
     lowercase: true,
     trim: true,
-    sparse: true,       // allows multiple users with null email
+    sparse: true,      // allows multiple users with null email
   },
 
   password: {
     type: String,
-    required: false,    // optional for OAuth users
+    required: false,   // optional for OAuth users
   },
 
   githubId: {
     type: String,
-    required: false,    // store GitHub ID if login via GitHub
+    required: false,   // store GitHub ID if login via GitHub
   },
 
   displayName: {
     type: String,
     required: false,
+  },
+
+  // 🔥 profile image is its OWN field now
   profileImage: {
     type: String,
-    default: "/uploads/default.png"   // you can create a default picture later
-  }
+    default: "/uploads/default.png",
   },
 });
 
-
 module.exports = mongoose.model("User", userSchema);
+
