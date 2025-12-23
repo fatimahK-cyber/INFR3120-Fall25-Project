@@ -1,9 +1,12 @@
-WorkIt – INFR3120 Project Part 1
+WorkIt – INFR3120 Final Project
 
-WorkIt is a simple fitness tracker web application built using   Node.js, Express.js, and EJS  . It includes three main pages:   Home ,  Add Workout  , and   My Workouts  . Users can create workouts and delete them.
+Description
+WorkIt is a simple fitness tracker web application built using Node.js, Express.js, and EJS . It includes three main pages:   Home,  Add Workout , and   My Workouts . Users can create workouts and delete them.
+
+Link: https://infr3120-fall25-project-4vrs.onrender.com 
 
 
-  Team Members & Responsibilities
+Team Members & Responsibilities
 
   Ayman Sohail    
  > Created the Home Page  
@@ -17,7 +20,7 @@ WorkIt is a simple fitness tracker web application built using   Node.js, Expres
  > Created form fields (name, type, duration, date)  
  > Implemented POST /workouts (Create)  
  > Connected form back to My Workouts
- > added comments on some pages and deployed on cloud 
+ > added comments on some pages and deployed on the cloud 
 
   Izzat Ikram    
  > Created the My Workouts page  
@@ -28,7 +31,7 @@ WorkIt is a simple fitness tracker web application built using   Node.js, Expres
 
  Sources Used 
 
-All code follows examples from INFR3120 course materials 
+All code follows examples from the INFR3120 course materials 
 
 
   From MEAN Stack Development slides:    
@@ -42,10 +45,9 @@ All code follows examples from INFR3120 course materials
  > Linking CSS from /public  
  > Navigation patterns  
 
-  From CRUD & Authentication sample project:    
+  From the CRUD & Authentication sample project:    
  > POST form handling  
- > Delete via POST button  
- > Passing arrays to EJS templates  
+ > Delete via the POST button  
 
   From WebProject / JavaScript Demo:    
  > Public folder structure  
