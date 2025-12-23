@@ -55,6 +55,5 @@ All code follows examples from INFR3120 course materials
   External documentation referenced only:    
  > Express.js documentation
 
- > https://www.w3schools.com/jsref/jsref_push.asp  AND   https://medium.com/%40SM196/simple-crud-application-in-javascript-bd6eaa4a1268  - fatimah used this to learn how to implement an array into our project
 
   
